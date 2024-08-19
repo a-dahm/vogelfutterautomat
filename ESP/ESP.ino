@@ -23,7 +23,7 @@
 #define WIFI_PASSWORD "****************"
 #define UPLOAD_SERVER "xxx.xxx.xxx.xxx"
 #define UPLOAD_PORT 80
-#define UPLOAD_PATH "/esp32/upload.php"
+#define UPLOAD_PATH "/upload.php"
 
 /* Definitionen für die einzelnen Module */
 /*    Kamera */
