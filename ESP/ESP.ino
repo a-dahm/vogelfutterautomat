@@ -130,7 +130,7 @@ void setup() {
       #endif
 
       #if DATEN_MODUS==TAEGLICHER_UPLOAD
-        //TODO: alle Dateien von der SD-Karte hochladen
+        upload_all_files();
       #endif
     }
   } else {
@@ -781,4 +781,119 @@ void generate_wav_header(uint8_t *wav_header, uint32_t wav_size, uint32_t sample
     wav_size, wav_size >> 8, wav_size >> 16, wav_size >> 24,  // Subchunk2Size
   };
   memcpy(wav_header, set_wav_header, sizeof(set_wav_header));
+}
+
+bool upload_all_files() {
+  if(!SD.begin(21)){
+      log_debug("\tFEHLER SD-Karte konnte nicht initialisiert werden");
+      return false;
+  }
+  File root = SD.open("/");
+  if(!root) return true;
+
+  if(!wifi_initialized) {
+    wifi_init();
+  }
+  
+  Serial.print("\tIP-Addresse: ");
+  Serial.println(WiFi.localIP());
+  Serial.print("\tVerbindung zum Server ");
+  Serial.print(UPLOAD_SERVER);
+  Serial.println("...");
+
+  //Alle Dateien auf der SD-Karte durchlaufen und einzeln hochladen.
+  File file = root.openNextFile();
+  while(file) {
+    if(!file.isDirectory()) {
+      bool success = upload_file(&file);
+      if(success) {
+        //Falls die Datei erfolgreich hochgeladen werden konnte wird diese gelöscht.
+        SD.remove(file.path());
+      }
+    }
+    file = root.openNextFile();
+  }
+
+  return true;
+}
+
+bool upload_file(File *file) {
+  if(!client.connect(UPLOAD_SERVER, UPLOAD_PORT)) {
+    Serial.println("\tFEHLER Server-Verbindung fehlgeschlagen");
+    return false;
+  }
+  String fn = file->name();
+
+  String head = "--File\r\nContent-Disposition: form-data; name=\"uploadFile\"; filename=\"" + fn + "\"\r\nContent-Type: image/jpeg\r\n\r\n";
+  String tail = "\r\n--File--\r\n";
+
+  uint32_t totalLen = file->size() + head.length() + tail.length();
+
+  Serial.println("\tBeginne Upload...");
+  Serial.println("\t\tHeaders");
+  client.println("POST /esp32/upload.php HTTP/1.1");
+  client.println("Host: " + String(UPLOAD_SERVER));
+  client.println("Content-Length: " + String(totalLen));
+  client.println("Content-Type: multipart/form-data; boundary=File");
+  client.println();
+  client.print(head);
+
+  size_t fbLen = file->size();
+  size_t packetSize = 4096;
+  Serial.print("\t\tBilddaten (");
+  Serial.print(fbLen);
+  Serial.println("b)");
+  Serial.println("Fortschritt:");
+  for(size_t n = 0; n < fbLen; n += packetSize) Serial.print(".");
+  Serial.println();
+
+  while(file->available()) {
+    int nextPacketSize = file->available();
+    if (nextPacketSize > 1350) {
+      nextPacketSize = 1350;
+    }
+    String buffer = "";
+    for(int i=0; i < nextPacketSize; i++) {
+      buffer += (char)file->read();
+    }
+    client.print(buffer);
+  }
+  
+  Serial.println();
+  Serial.println("\t\tFooter");
+  client.print(tail);
+  
+  Serial.println("\tWarte auf Antwort des Servers...");
+
+  int timeoutTimer = 10000;
+  long startTimer = millis();
+  String status = "";
+  boolean done = false;
+  while (!done && (startTimer + timeoutTimer) > millis()) {
+    delay(10);
+    while (client.available()) {
+      char c = client.read();
+      Serial.print(c);
+      if (c == '\r' || c == '\n') {
+        if (status.length() > 0) {
+          done = true;
+          break;
+        }
+      }
+      else {
+        status += String(c);
+      }
+    }
+  }
+  Serial.println();
+  Serial.println("\tBeende Server-Verbindung");
+  client.stop();
+  
+  Serial.print("\tStatus: ");
+  Serial.println(String(status).c_str());
+  if(status.indexOf("200") > -1) {
+    return true;
+  } else {
+    return false;
+  }
 }
