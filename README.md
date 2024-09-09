@@ -131,6 +131,8 @@ Bei der eigenen Herstellung sollte darauf geachtet werden, ob es möglich ist, e
 
 Fast alle Bauteile des Gehäuses werden per Steckverbindung zusammengefügt. Dabei kann die Toleranz dieser Verbindungen jedoch nicht im Allgemeinen für jeden Drucker korrekt in den gebotenen Modell-Dateien geboten werden. Daher wird es sehr wahrscheinlich notwendig sein, die einzelnen Steckverbindungen mit Feile oder anderen Schleifmethoden nachzubearbeiten, bis die Steckverbindungen der Bauteile zusammenpassen.
 
+#### Merkmale
+
 Die Solarzelle kann beliebig links oder rechts auf dem Dach platziert werden. Das Verbindungskabel wird dann über die Rückseite durch eine Öffnung direkt unterhalb des Daches in die innere Kammer geführt:
 
 <p align="center">
@@ -161,8 +163,70 @@ Auf der Rückseite des Gehäuse befindet sich eine Öffnung, um Vogelfutter nach
     <img src="Bilder/gehaeuse_rueckseite.png" width="500">
 </p>
 
-An den Rändern der Rückseite werden 6 M3 Schrauben verwendet, um diese mit den Seitenwänden zu verbinden. Dazu wird zunächst jeweils eine M3 Mutter in die dafür vorgesehenen rechteckigen Öffnungen auf den Seitenwänden gepresst, sodass diese nicht mehr rotieren kann. Dann kann durch die Rückwand hindurch jeweils eine M3 Schraube in jede Mutter eingeführt und fixiert werden:
+#### Zusammenbau
+
+Der Zusammenbau des Gehäuses ist weitestgehend selbsterklärend. Zunächst wird der Li-Po Akku mit doppelseitigem Klebeband an der Rückseite der Vorderwand befestigt. Dabei sollte darauf geachtet werden, dass das Kabel des Akkus nach unten ausgerichtet ist.
+
+<p align="center">
+    <img src="Bilder/gehaeuse_schritt_1.png" width="500">
+</p>
+
+Vom Futtertrog ausgehend werden die Vorderwand, der untere Teil der Rückwand und der Kammer-Separator zusammengesteckt:
+
+<p align="center">
+    <img src="Bilder/gehaeuse_schritt_2.png" width="500">
+</p>
+
+Das Dach wird dann zunächst separat inklusive der PIR-Sensorhalterung zusammengesteckt:
+
+<p align="center">
+    <img src="Bilder/gehaeuse_schritt_3.png" width="500">
+</p>
+
+Die Elektronik wird an der noch separierten oberen Rückwand mittels 4 M2 Schrauben und Muttern befestigt:
+
+<p align="center">
+    <img src="Bilder/gehaeuse_schritt_4.png" width="500">
+</p>
+
+Das Kamera-Modul wird dann von oben in die dafür vorgesehene Halterung in der Vorderwand eingeführt. Eventuell muss hierfür die Linse etwas verstellt werden:
+
+<p align="center">
+    <img src="Bilder/gehaeuse_schritt_5.png" width="500">
+</p>
+
+Das Solar Power Manager Board wird dann im Inneren der Kammer platziert und zunächst nur mit dem Li-Po Akku verbunden:
+
+<p align="center">
+    <img src="Bilder/gehaeuse_schritt_6.png" width="500">
+</p>
+
+Nun wird der obere Teil der Rückwand inklusive der Platine sowie eine der Seitenwände angesteckt. Die Seitenwand wird dann mit 3 M3 Schrauben und Muttern an den beiden Teilen der Rückwand fixiert. Dazu wird zunächst jeweils eine M3 Mutter in die dafür vorgesehenen rechteckigen Öffnungen auf den Seitenwänden gepresst, sodass diese nicht mehr rotieren kann. Dann kann durch die Rückwand hindurch jeweils eine M3 Schraube in jede Mutter eingeführt und fixiert werden:
 
 <p align="center">
     <img src="Bilder/gehaeuse_m3_mechanismus.png" width="500">
+</p>
+
+Nun kann die Stromversorgung des Solar Power Manager Boards mit der Platine verbunden werden. Zudem wird auch das Kamera-Modul an den XIAO ESP32S3 Sense angeschlossen.
+
+<p align="center">
+    <img src="Bilder/gehaeuse_schritt_7.png" width="500">
+</p>
+
+Ohne das Dach bereits aufzustecken wird nun der Anschluss der Solarzelle durch die obere Öffnung der Rückwand geführt und an das Solar Power Manager Board angeschlossen. Zudem wird die Verkabelung des PIR-Bewegungsmelders mit der Platine durchgeführt. Falls dies in der Konfiguration der Firmware vorgesehen ist, wird in diesem Schritt auch die SD-Karte in den SD-Kartenleser des XIAO ESP32S3 Sense gesteckt. Jetzt kann die zweite Seitenwand angebracht werden. Diese wird ebenfalls durch 3 M3 Schrauben und Muttern an der Rückwand befestigt.
+
+<p align="center">
+    <img src="Bilder/gehaeuse_schritt_8.png" width="500">
+</p>
+
+Im letzten Schritt wird das Dach auf der Oberseite des Gerätes aufgesteckt. Hierbei muss darauf geachtet werden, dass die Kabel des PIR-Bewegungsmelder über die Flache Kante der Vorderwand von Außen in die innere Kammer geführt wurden, ohne dass diese durch das Dach gequetscht werden.
+
+<p align="center">
+    <img src="Bilder/gehaeuse_schritt_9.png" width="500">
+</p>
+
+Der PIR-Bewegungssensor wird dann in der dafür vorgesehenen Halterung an der Unterseite des Daches befestigt. Die Solarzelle wird auf der Seite des Daches platziert. Damit ist der Zusammenbau abgeschlossen.
+
+<p align="center">
+    <img src="Bilder/gehaeuse_schritt_10.png" width="500">
 </p>
