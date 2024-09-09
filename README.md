@@ -34,8 +34,6 @@ Das gesamte für den Zusammenbau benötigte Material (mit beispielhaften Links):
 
 ## Anleitung
 
-### Elektronik
-
 ### Firmware
 
 Für das Anpassen und Überspielen der Firmware auf die beiden Mikroprozessor-Boards wird die [Arduino IDE](https://www.arduino.cc/en/software) benötigt. Als Einführung hier die offizielle (englische) Anleitung: [Link](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started-ide-v2/)
@@ -79,8 +77,6 @@ Vor dem Überspielen der Firmware muss unter "Werkzeuge" > "PSRAM" der Wert "OPI
 <img src="Bilder/anleitung-arduino-ide-esp32s3.png"/>
 </p>
 
-### Gehäuse
-
 ### Server
 
 Die Server-Seite verwendet HTML & PHP. Dafür muss eine entsprechende Server-Software auf einem geeigneten Gerät installiert werden. Das verwendete Gerät sollte soweit möglich durchgehend erreichbar sein, damit jederzeit Uploads stattfinden können. Es wird daher empfohlen, dafür zum Beispiel einen Raspberry Pi oder einen Mini-PC zu verwenden.
@@ -98,3 +94,24 @@ Damit die Webseite durch den ESP32S3 gefunden werden kann muss die IP-Adresse in
 
 * Anleitung für Windows [hier](https://support.microsoft.com/de-de/windows/suchen-sie-ihre-ip-adresse-in-windows-f21a9bbc-c582-55cd-35e0-73431160a1b9)
 * Anleitung für Linux [hier](https://www.ionos.de/digitalguide/hosting/hosting-technik/linux-ip-adresse-anzeigen/)
+
+
+
+### Elektronik
+
+Der Schaltplan der Platine ist im Verzeichnis `Elektronik` zu finden. Die `.fzz`-Datei kann mit der Software [Fritzing](https://fritzing.org/) eingesehen werden. Bei Fritzing handelt es sich zwar um Open-Source Software, jedoch wird die kompilierte Version nur gegen Zahlung vertrieben. Falls die Software also nicht verwendet werden kann, finden Sie hier einen Screenshot des Schaltplans:
+
+<p align="center">
+<img src="Bilder/platine-fritzing.png"/>
+</p>
+
+Dabei wurden für die Anschlüsse mit der Bezeichnung `-/A/+ PIR` (oben links) einfache Stiftleisten verwendet. Für `-/+ PWR` (oben links) wurden Schraubklemmen gewählt. Das RTC-Modul (rechts) wurde mit 90° gebogenen Stiften versehen und deshalb auch mit 90°-Winkel Stiftleisten auf der Platine befestigt.
+
+Die fertiggestellte Platine inklusive der einzelnen Komponenten sieht Schlußendlich wie folgt aus:
+
+<p align="center">
+<img src="Bilder/platine.jpg"/>
+</p>
+
+### Gehäuse
+
