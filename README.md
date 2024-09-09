@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="Bilder/gehaeuse_xray.png" width="500">
+    <img src="Bilder/vogelfutterautomat.jpg" width="600">
 </p>
 
 `⚠️ Dieses Projekt befindet sich zurzeit noch in der Prototyp-Phase. Der Prototyp ist funktionstüchtig, jedoch gibt es noch viel zu verbessern, damit das Gerät tatsächlich einen einsetzbaren Zustand erreicht. ⚠️`
@@ -115,3 +115,54 @@ Die fertiggestellte Platine inklusive der einzelnen Komponenten sieht Schlußend
 
 ### Gehäuse
 
+Die Modell-Dateien für das Gehäuse können im Verzeichnis `Gehäuse` gefunden werden.
+
+Das Gehäuse wurde für die Herstellung mittels 3D-Druck konzipiert. Neben den einzelnen Bauteilen im `STL`-Dateiformat wurde auch das komplette Modell als [Sketchup](https://www.sketchup.com/)-Datei (`SKP`-Dateiformat) hinterlegt. Dadurch können eigene Anpassungen durchgeführt werden, soweit dies erforderlich ist.
+
+<p align="center">
+    <img src="Bilder/gehaeuse_xray.png" width="500">
+</p>
+
+In der Sketchup-Datei wurden auch die restlichen Komponenten, wie beispielsweise die Solarzelle und das Kamera-Modul, eingezeichnet. Falls sich diese Maße von denen Ihrer Komponenten unterscheided, was beispielsweise bei der gelöteten Platine der Fall sein kann, müssen eventuell hier Anpassungen durchgeführt werden.
+
+Falls kein eigener 3D-Drucker zur Verfügung steht kann die Produktion des Gehäuses auch durch einen Dienstleister durchgeführt werden lassen. Dazu reicht es aus, die `STL`-Dateien an diesen zu übergeben.
+
+Bei der eigenen Herstellung sollte darauf geachtet werden, ob es möglich ist, ein Hitzebeständigeres Material als PLA zu verwenden, da dieses eventuell unter intensiver Sonneneinstrahlung die Erweichungstemperatur erreicht. Empfohlen wird hier der Druck mittels PETG-Filament. Die Druckzeit unterscheided sich je nach Drucker, Filament und Konfiguration immens. Ein Testdruck, der auf einem Prusa I3 MK3S+ mit PETG-Filament durchgeführt wurde, dauerte insgesamt circa 45 Stunden.
+
+Fast alle Bauteile des Gehäuses werden per Steckverbindung zusammengefügt. Dabei kann die Toleranz dieser Verbindungen jedoch nicht im Allgemeinen für jeden Drucker korrekt in den gebotenen Modell-Dateien geboten werden. Daher wird es sehr wahrscheinlich notwendig sein, die einzelnen Steckverbindungen mit Feile oder anderen Schleifmethoden nachzubearbeiten, bis die Steckverbindungen der Bauteile zusammenpassen.
+
+Die Solarzelle kann beliebig links oder rechts auf dem Dach platziert werden. Das Verbindungskabel wird dann über die Rückseite durch eine Öffnung direkt unterhalb des Daches in die innere Kammer geführt:
+
+<p align="center">
+    <img src="Bilder/gehaeuse_solarzelle.png" width="500">
+</p>
+
+Der PIR-Bewegungssensor wurde unter dem Dach platziert und nach unten auf den Futtertrog ausgerichtet. Die Kabel des Sensors werden unter dem Dach durch eine Öffnung ins Innere geführt:
+
+<p align="center">
+    <img src="Bilder/gehaeuse_bewegungsmelder.png" width="500">
+</p>
+
+Die Linse des OV2640-Kamera-Moduls wird auf der Vorderseite des Gehäuse platziert. Diese wird von oben in einen Schlitz eingeführt, um die Linse zu fixieren:
+
+<p align="center">
+    <img src="Bilder/gehaeuse_kamera.png" width="500">
+</p>
+
+Die restliche Elektronik wurde im inneren des Gehäuses platziert. Der Li-Po Akku (links) wird mit doppelseitigem Klebeband über der Kamera an der Vorderwand fixiert. Das DFRobot Solar Power Manager Board wird ohne fixierung im unteren Bereich abgelegt. Die Platine mit den restlichen Komponenten (rechts) wird gegenüber der Kamera mittels 4 M2 Schrauben und Muttern an der Rückwand befestigt.
+
+<p align="center">
+    <img src="Bilder/gehaeuse_elektronik.png" width="500">
+</p>
+
+Auf der Rückseite des Gehäuse befindet sich eine Öffnung, um Vogelfutter nachzufüllen. Zudem befinden sich hier zwei Öffnungen, durch die der Vogelfutterautomat mittels Schrauben an einer Hauswand befestigt werden.
+
+<p align="center">
+    <img src="Bilder/gehaeuse_rueckseite.png" width="500">
+</p>
+
+An den Rändern der Rückseite werden 6 M3 Schrauben verwendet, um diese mit den Seitenwänden zu verbinden. Dazu wird zunächst jeweils eine M3 Mutter in die dafür vorgesehenen rechteckigen Öffnungen auf den Seitenwänden gepresst, sodass diese nicht mehr rotieren kann. Dann kann durch die Rückwand hindurch jeweils eine M3 Schraube in jede Mutter eingeführt und fixiert werden:
+
+<p align="center">
+    <img src="Bilder/gehaeuse_m3_mechanismus.png" width="500">
+</p>
