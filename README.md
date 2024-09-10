@@ -1,35 +1,68 @@
 <p align="center">
-    <img src="Bilder/vogelfutterautomat.jpg" width="600">
+    <img src="Bilder/vogelfutterautomat.jpg" width="600" />
 </p>
 
 `⚠️ Dieses Projekt befindet sich zurzeit noch in der Prototyp-Phase. Der Prototyp ist funktionstüchtig, jedoch gibt es noch viel zu verbessern, damit das Gerät tatsächlich einen einsetzbaren Zustand erreicht. ⚠️`
 
+<!-- omit in toc -->
+# Inhaltsverzeichnis
+
+- [Vogelfutterautomat](#vogelfutterautomat)
+  - [Funktionsweise](#funktionsweise)
+  - [Repository-Übersicht](#repository-übersicht)
+  - [Materialübersicht](#materialübersicht)
+  - [Anleitung](#anleitung)
+    - [Firmware](#firmware)
+      - [Arduino Pro Mini 3V](#arduino-pro-mini-3v)
+      - [Seeed Studio XIAO ESP32S3 Sense](#seeed-studio-xiao-esp32s3-sense)
+    - [Server](#server)
+    - [Elektronik](#elektronik)
+    - [Gehäuse](#gehäuse)
+      - [Merkmale](#merkmale)
+      - [Zusammenbau](#zusammenbau)
+
 # Vogelfutterautomat
 
-Bei diesem Projekt handelt es sich um einen Vogelfutterautomat mit integrierter Kamera und Mikrofon zur automatischen Durchführung von Bild- und Audioaufnahmen von Vögeln. Das Gerät kann die gesammelten Daten per WLAN an ein externes System übertragen oder diese auf einer SD-Karte speichern. Als Stromversorgung dient ein Li-Po-Akku in Kombination mit einer Solarzelle.
+Bei diesem Projekt handelt es sich um einen Vogelfutterautomat mit integrierter Kamera und Mikrofon zur automatischen Durchführung von Bild- und Audioaufnahmen von Vögeln. Das Gerät kann die gesammelten Daten per WLAN an ein externes System übertragen oder diese auf einer SD-Karte speichern.
+
+## Funktionsweise
+
+Das Gerät basiert auf der Kombination eines Arduino Pro Mini und einem Seeed Studio XIAO ESP32S3 Sense. Als Stromversorgung dient ein Li-Po-Akku in Kombination mit einer Solarzelle und dem Solar Power Manager Board von DFRobot.
+
+Der ESP32S3 führt mithilfe eines OV2640 Kamera-Moduls und dem integrierten Mikrofon Aufnahmen durch. Um den Stromverbrauch zu verringern wird die Stromversorgung des ESP32S3 durch den Arduino Pro Mini gesteuert. Der Arduino Pro Mini befindet sich dabei die meiste Zeit im Stromsparenden Deep-Sleep-Modus und wird mithilfe eines DS3231 Real-Time-Clock-Moduls sowie einem M5Stack AS312 PIR Bewegungssensor aufgeweckt.
+
+Die Elektronik ist also wie folgt aufgebaut:
+
+<p align="center">
+    <img src="Bilder/system-diagramm.svg" width="600" style="background-color: #fff" />
+</p>
+
+Je nach Firmware-Konfiguration werden bei jeder Aufweckung Foto- und Audio-Aufnahmen durch den ESP32S3 erhoben. Die Daten können dann entweder auf einer SD-Karte gespeichert oder per WLAN an einen dafür eingerichteten Webserver übertragen werden.
 
 ## Repository-Übersicht
 
 * Arduino: Firmware für den Arduino Pro Mini 3V
-* Bilder: Enthält die in diesem Dokument verwendeten Bilder
 * ESP: Firmware für den Seeed Studio XIAO ESP32S3 Sense
-* Gehäuse: STL-Dateien für den 3D-Druck des Gehäuses
+* Elektronik: Zeichnung des Schaltkreises.
+* Bilder: Enthält die in diesem Dokument verwendeten Bilder
+* Gehäuse: STL- und Sketchup-Dateien für den 3D-Druck des Gehäuses
 * Server: Software für den PHP-Server
 
 ## Materialübersicht
 
-Das gesamte für den Zusammenbau benötigte Material (mit beispielhaften Links):
+Das gesamte für den Zusammenbau benötigte Material (mit beispielhaften Links wo angebracht):
 
-* Arduino Pro Mini 3V [Berrybase](https://www.berrybase.de/arduino-pro-mini-328-3.3v/8mhz)
-* Seeed Studio XIAO ESP32S3 Sense [Berrybase](https://www.berrybase.de/seeed-xiao-esp32s3-sense-esp32-s3r8-wlan-ble-5.0-ov2640-kamerasensor-8mb-psram-8mb-flash)
-* DS3231 Real-Time-Clock-Modul [Eckstein-Shop](https://eckstein-shop.de/DS3231RTCModulI2CAT24C32forArduino2CwithLIR2032BatteryEN)
-* PIR Modul (TODO)
-* DFRobot Solar Power Manager [Eckstein-Shop](https://eckstein-shop.de/DFRobotSolarPowerManager5VEN)
+* Arduino Pro Mini 3V ([Berrybase](https://www.berrybase.de/arduino-pro-mini-328-3.3v/8mhz))
+* Seeed Studio XIAO ESP32S3 Sense ([Berrybase](https://www.berrybase.de/seeed-xiao-esp32s3-sense-esp32-s3r8-wlan-ble-5.0-ov2640-kamerasensor-8mb-psram-8mb-flash))
+* DS3231 Real-Time-Clock-Modul ([Eckstein-Shop](https://eckstein-shop.de/DS3231RTCModulI2CAT24C32forArduino2CwithLIR2032BatteryEN))
+* PIR Modul ([Robotshop](https://eu.robotshop.com/de/products/m5stack-pir-bewegungssensor-as312))
+* DFRobot Solar Power Manager ([Eckstein-Shop](https://eckstein-shop.de/DFRobotSolarPowerManager5VEN))
 * Li-Po Akku
 * Solarzelle
-* OV2640 mit langem Ribbon-Cable und Weitwinkellinse [Amazon](https://amazon.de/dp/B0BXSL76L8)
-* 6x M3-Schraube sowie Mutter (Gehäuse)
-* 4x M2-Schraube sowie Mutter (Befestigung Platine)
+* OV2640 mit langem Ribbon-Cable und Weitwinkellinse ([Amazon](https://amazon.de/dp/B0BXSL76L8))
+* 6x M3-Schraube sowie Mutter für die Fixierung des Gehäuses
+* 4x M2-Schraube sowie Mutter für die Befestigung der Platine im Gehäuse
+* Lochraster-Platine (70 x 50 mm) ([Eckstein-Shop](https://eckstein-shop.de/Lochrasterplatine50x70mmExperimentierplatineLC3B6tplatinePrototypeLeiterplattePCB2StC3BCcke))
 * Lötmaterial (Platine, Verbindungskabel, Stiftleisten)
 
 ## Anleitung
